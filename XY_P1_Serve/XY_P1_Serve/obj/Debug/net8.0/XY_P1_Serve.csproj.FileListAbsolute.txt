@@ -1,0 +1,14 @@
+D:\Work\Project1\P1\XY_P1_Serve\XY_P1_Serve\bin\Debug\net8.0\XY_P1_Serve.exe
+D:\Work\Project1\P1\XY_P1_Serve\XY_P1_Serve\bin\Debug\net8.0\XY_P1_Serve.deps.json
+D:\Work\Project1\P1\XY_P1_Serve\XY_P1_Serve\bin\Debug\net8.0\XY_P1_Serve.runtimeconfig.json
+D:\Work\Project1\P1\XY_P1_Serve\XY_P1_Serve\bin\Debug\net8.0\XY_P1_Serve.dll
+D:\Work\Project1\P1\XY_P1_Serve\XY_P1_Serve\bin\Debug\net8.0\XY_P1_Serve.pdb
+D:\Work\Project1\P1\XY_P1_Serve\XY_P1_Serve\obj\Debug\net8.0\XY_P1_Serve.GeneratedMSBuildEditorConfig.editorconfig
+D:\Work\Project1\P1\XY_P1_Serve\XY_P1_Serve\obj\Debug\net8.0\XY_P1_Serve.AssemblyInfoInputs.cache
+D:\Work\Project1\P1\XY_P1_Serve\XY_P1_Serve\obj\Debug\net8.0\XY_P1_Serve.AssemblyInfo.cs
+D:\Work\Project1\P1\XY_P1_Serve\XY_P1_Serve\obj\Debug\net8.0\XY_P1_Serve.csproj.CoreCompileInputs.cache
+D:\Work\Project1\P1\XY_P1_Serve\XY_P1_Serve\obj\Debug\net8.0\XY_P1_Serve.dll
+D:\Work\Project1\P1\XY_P1_Serve\XY_P1_Serve\obj\Debug\net8.0\refint\XY_P1_Serve.dll
+D:\Work\Project1\P1\XY_P1_Serve\XY_P1_Serve\obj\Debug\net8.0\XY_P1_Serve.pdb
+D:\Work\Project1\P1\XY_P1_Serve\XY_P1_Serve\obj\Debug\net8.0\XY_P1_Serve.genruntimeconfig.cache
+D:\Work\Project1\P1\XY_P1_Serve\XY_P1_Serve\obj\Debug\net8.0\ref\XY_P1_Serve.dll
