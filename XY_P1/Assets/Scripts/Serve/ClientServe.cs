@@ -7,16 +7,12 @@ using UnityEngine;
 
 public class ClientServe
 {
-    private Socket clientSocket;
-    private IPEndPoint _ipEnd;
-    public void ConnectServe(string ip, int port)
+    private TcpClient _client = new TcpClient();
+    public async void ConnectServe(string ip, int port)
     {
         try
         {
-            _ipEnd = new IPEndPoint(IPAddress.Parse(ip), port);
-            clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            AsyncCallback callback = ConnectCallback;
-            clientSocket.BeginConnect(_ipEnd,callback, port);
+            await _client.ConnectAsync(ip, port);
             GameEntry.ins.OnLog?.Invoke("Connect to server");
         }
         catch (Exception e)
@@ -25,26 +21,5 @@ public class ClientServe
             throw;
         }
         
-    }
-    
-    private void ConnectCallback(IAsyncResult ar)
-    {
-        try
-        {
-            if (ar.IsCompleted)
-            {
-                GameEntry.ins.OnLog?.Invoke("ConnectCallback Connect to server success");
-            }
-            else
-            {
-                GameEntry.ins.OnLog?.Invoke("ConnectCallback Connect to server fail");
-            }
-            clientSocket.EndConnect(ar);
-        }
-        catch (Exception e)
-        {
-            GameEntry.ins.OnLog?.Invoke(e.ToString());
-            throw;
-        }
     }
 }

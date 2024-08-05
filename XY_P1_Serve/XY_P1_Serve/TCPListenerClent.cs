@@ -14,6 +14,8 @@ public class TCPListenerClent
     //Socket
     private Socket _socket;
 
+    private TcpListener tcpListener;
+
     public Action<Socket> ConnectClientAction { get; set; }
     //设置服务器的IP地址和端口号
     public TCPListenerClent()
@@ -26,24 +28,37 @@ public class TCPListenerClent
     {
         try
         {
-            _ipEnd = new IPEndPoint(IPAddress.Parse(ip), port);
-            //第一个参数指定地址族，设置为ipv4，第二个参数指定套接字类型(流式)，第三个参数指定协议(TCP 协议)
-            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            //服务器绑定IP地址和端口号
-            _socket.Bind(_ipEnd);
+            tcpListener = new TcpListener(IPAddress.Parse(ip), port);
+            tcpListener.Start();
+
             Console.WriteLine("链接服务器成功");
-            _socket.Listen(10);
             //开始接受客户端链接
-            SocketAsyncEventArgs e = new SocketAsyncEventArgs();
-            e.Completed += new EventHandler<SocketAsyncEventArgs>(Accept_Completed);
-            _socket.AcceptAsync(e);
+            AcceptClientAsync();
         }
         catch (Exception e)
         {
-            Console.WriteLine("链接服务器失败");
+            Console.WriteLine("StartListener 链接服务器失败,e=" + e);
             return;
         }
     }
+
+    public async void AcceptClientAsync()
+    {
+        try
+        {
+            TcpClient tcpClient = await tcpListener.AcceptTcpClientAsync();
+            
+            ConnectClientAction?.Invoke(tcpClient.Client);
+            AcceptClientAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("AcceptClientAsync 链接服务器失败,e=" + e);
+            tcpListener.Stop();
+            return;
+        }
+    }
+ 
 
     protected void Accept_Completed(object sender, SocketAsyncEventArgs e)
     {

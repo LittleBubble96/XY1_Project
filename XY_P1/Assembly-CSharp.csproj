@@ -46,7 +46,9 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Main\MonoInstance.cs" />
+     <Compile Include="Assets\Scripts\Main\CharactorMoveComponent.cs" />
      <Compile Include="Assets\Scripts\Serve\ClientServe.cs" />
+     <Compile Include="Assets\Scripts\Main\CharacterAnimComponent.cs" />
      <Compile Include="Assets\Scripts\Main\UI\UI_Main.cs" />
      <Compile Include="Assets\Scripts\Main\GameEntry.cs" />
      <Folder Include="Assets" />
@@ -71,14 +73,17 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+     <Folder Include="Assets\Res\Character" />
      <Folder Include="Assets\Scripts\Serve" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
      <Folder Include="Assets\TextMesh Pro\Shaders" />
      <Folder Include="Assets\Scripts\Main\UI" />
      <Folder Include="Assets\TextMesh Pro\Resources\Style Sheets" />
      <Folder Include="Assets\TextMesh Pro\Fonts" />
+     <Folder Include="Assets\Res\Anim" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+     <Folder Include="Assets\Res" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
@@ -722,6 +727,9 @@
      <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
      <HintPath>D:\Work\Project1\P1\XY_P1\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
      </Reference>
+     <Reference Include="com.unity.cinemachine.editor">
+     <HintPath>D:\Work\Project1\P1\XY_P1\Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
+     </Reference>
      <Reference Include="Unity.Performance.Profile-Analyzer.Editor">
      <HintPath>D:\Work\Project1\P1\XY_P1\Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
      </Reference>
@@ -769,6 +777,9 @@
      </Reference>
      <Reference Include="Unity.VSCode.Editor">
      <HintPath>D:\Work\Project1\P1\XY_P1\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Cinemachine">
+     <HintPath>D:\Work\Project1\P1\XY_P1\Library\ScriptAssemblies\Cinemachine.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.Flow">
      <HintPath>D:\Work\Project1\P1\XY_P1\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
