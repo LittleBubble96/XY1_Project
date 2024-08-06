@@ -8,6 +8,7 @@ enum ECharacterState
     None,
     Idle,
     Move,
+    MoveEnd,
     Jump,
 }
 
@@ -18,20 +19,20 @@ public class CharacterMoveComponent : MonoBehaviour
     [SerializeField] private float rotateSpeed = 5;
     [SerializeField] private float jumpForce = 5;
     [SerializeField] private float gravity = 9.8f;
+    [SerializeField] private float stRunTime = 0.1f;
+    [SerializeField] private float edRunTime = 0.1f;
     
     private ECharacterState _characterState;
     //角色相关组件
     private CharacterController _controller;
     private Animator _animator;
     [SerializeField] private Camera _followCamera;
-    [SerializeField] private Transform _root;
     //临时变量
     private Vector3 _moveDir;
     private float _ySpeed;
     private bool _isJumping;
 
-    private Vector3 _initRootPos;
-    private Quaternion _initRootRot;
+    private float _runTimer = 0;
     
     //动画值
     private static readonly int MoveValue = Animator.StringToHash("MoveValue");
@@ -50,6 +51,11 @@ public class CharacterMoveComponent : MonoBehaviour
                 else if (_characterState == ECharacterState.Move)
                 {
                     _animator.SetFloat(MoveValue, 1);
+                    _runTimer = stRunTime;
+                }
+                else if (_characterState == ECharacterState.MoveEnd)
+                {
+                    _runTimer = edRunTime;
                 }
                 else if (_characterState == ECharacterState.Jump)
                 {
@@ -63,8 +69,6 @@ public class CharacterMoveComponent : MonoBehaviour
     {
         _controller = GetComponent<CharacterController>();
         _animator = GetComponentInChildren<Animator>();
-        _initRootPos = _root.localPosition;
-        _initRootRot = _root.localRotation;
     }
     private void Update()
     {
@@ -81,12 +85,40 @@ public class CharacterMoveComponent : MonoBehaviour
         }
         else
         {
-            CharacterState = ECharacterState.Idle;
+            if (CharacterState == ECharacterState.Move)
+            {
+                CharacterState = ECharacterState.MoveEnd;
+            }
+            else
+            {
+                CharacterState = ECharacterState.Idle;
+            }
         }
+        float speed = moveSpeed;
+        if (CharacterState == ECharacterState.Move)
+        {
+            if (_runTimer > 0)
+            {
+                _runTimer -= Time.deltaTime;
+                speed = Mathf.Lerp(0, moveSpeed, 1 -_runTimer / stRunTime);
+            }
+        }
+        else if (CharacterState == ECharacterState.MoveEnd)
+        {
+            if (_runTimer > 0)
+            {
+                _runTimer -= Time.deltaTime;
+                if (_runTimer <= 0)
+                {
+                    CharacterState = ECharacterState.Idle;
+                }
+            }
+        }
+        
         // _moveDir = transform.TransformDirection(new Vector3(h, 0, v));
         //临时写法
         Rotate();
-        _moveDir *= moveSpeed;
+        _moveDir *= speed;
         if (_controller.isGrounded)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -137,6 +169,6 @@ public class CharacterMoveComponent : MonoBehaviour
         Vector3 rootPos = _animator.deltaPosition;
         _controller.Move( rootPos * 100);
         
-        transform.rotation *= _root.localRotation * _animator.deltaRotation  ;
+        transform.rotation *= _animator.deltaRotation  ;
     }
 }
