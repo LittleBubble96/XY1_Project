@@ -116,7 +116,7 @@ public class CharacterMoveComponent : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         _moveDir = cameraForward * v + cameraRight * h;
-        
+        _moveDir.Normalize();
         if (_moveDir != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(_moveDir);
@@ -131,5 +131,12 @@ public class CharacterMoveComponent : MonoBehaviour
             _isJumping = false;
         }
     }
-    
+
+    private void OnAnimatorMove()
+    {
+        Vector3 rootPos = _animator.deltaPosition;
+        _controller.Move( rootPos * 100);
+        
+        transform.rotation *= _root.localRotation * _animator.deltaRotation  ;
+    }
 }
